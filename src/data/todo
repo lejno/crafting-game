@@ -1,0 +1,13 @@
+PER SECOND 
+
+
+BUILDING COUNT resources?? building??
+
+
+new structure? 
+
+
+ income: {
+     stoneMill: { resource: 'stone', amount: 1, interval: 1000, count: 2 },
+     
+   }

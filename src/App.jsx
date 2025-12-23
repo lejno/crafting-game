@@ -1,17 +1,34 @@
 import ResourceButton from "./ResourceButton";
-import { useLocalStorage } from "./useLocalStorage";
-
 import "./App.css";
-
 import * as buildings from "./data/buildings";
-import HouseBuild from "./HouseBuild";
+import Build from "./Build";
+import { useEffect, useState } from "react";
+import { validate } from "plotly.js-dist-min";
 
 function App() {
-  const [resources, setResources] = useLocalStorage("resources", {
-    wood: 0,
-    stone: 0,
-    iron: 0,
+  const [resources, setResources] = useState({
+    wood: 1000,
+    stone: 1000,
+    iron: 1000,
   });
+
+  const [income, setIncome] = useState({});
+
+  useEffect(() => {
+    const intervalIds = [];
+    for (const [resource, interval] of Object.entries(income)) {
+      const id = setInterval(() => {
+        setResources((prev) => ({
+          ...prev,
+          [resource]: prev[resource] + interval[0],
+        }));
+      }, interval[1]);
+      intervalIds.push(id);
+    }
+    return () => {
+      intervalIds.forEach((id) => clearInterval(id));
+    };
+  }, [income]);
 
   return (
     <>
@@ -34,7 +51,18 @@ function App() {
         resources={resources}
         setResources={setResources}
       />
-      <HouseBuild setWood={resources.setWood} />
+      <Build
+        setResources={setResources}
+        resources={resources}
+        building={buildings.farm}
+      />
+      <Build
+        setResources={setResources}
+        resources={resources}
+        building={buildings.stoneMill}
+        income={income}
+        setIncome={setIncome}
+      />
     </>
   );
 }
