@@ -2,8 +2,8 @@ export default function Build({
   setResources,
   resources,
   building,
-  income,
-  setIncome,
+  production,
+  setProduction,
 }) {
   function handleClick() {
     const canBuild = Object.entries(building.cost).every(
@@ -20,17 +20,22 @@ export default function Build({
       newResources[resource] -= cost;
     });
 
-    const newIncome = { ...income };
-    Object.entries(building.income).forEach(([resource, [amount, time]]) => {
-      if (newIncome[resource]) {
-        newIncome[resource][0] += amount; // Add to existing amount
-      } else {
-        newIncome[resource] = [amount, time]; // Create new entry
-      }
-    });
+    const newProduction = { ...production };
+    if (building.income) {
+      Object.entries(building.income).forEach(
+        ([resource, [amount, interval]]) => {
+          const key = `${building.name}-${resource}`;
+          if (newProduction[key]) {
+            newProduction[key].count += 1;
+          } else {
+            newProduction[key] = { resource, amount, interval, count: 1 };
+          }
+        }
+      );
+    }
 
     setResources(newResources);
-    setIncome(newIncome);
+    setProduction(newProduction);
   }
 
   return (

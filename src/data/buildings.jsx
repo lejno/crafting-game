@@ -5,14 +5,5 @@ export const stoneMill = {
   },
   income: {
     stone: [1, 1000],
-    wood: [1, 1000],
-  },
-};
-
-export const farm = {
-  name: "Farm",
-  cost: {
-    wood: 10,
-    stone: 10,
   },
 };

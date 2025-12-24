@@ -15,15 +15,13 @@ function App() {
 
   useEffect(() => {
     const intervalIds = [];
-    for (const [_, { resource, amount, interval, count }] of Object.entries(
-      production
-    )) {
+    for (const [resource, interval] of Object.entries(production)) {
       const id = setInterval(() => {
         setResources((prev) => ({
           ...prev,
-          [resource]: prev[resource] + amount * count,
+          [resource]: prev[resource] + interval[0],
         }));
-      }, interval);
+      }, interval[1]);
       intervalIds.push(id);
     }
     return () => {
@@ -52,7 +50,11 @@ function App() {
         resources={resources}
         setResources={setResources}
       />
-
+      <Build
+        setResources={setResources}
+        resources={resources}
+        building={buildings.farm}
+      />
       <Build
         setResources={setResources}
         resources={resources}
