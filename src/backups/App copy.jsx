@@ -1,7 +1,7 @@
-import ResourceButton from "./ResourceButton";
+import ResourceButton from "../ResourceButton";
 import "./App.css";
-import * as buildings from "./data/buildings";
-import Build from "./Build";
+import * as buildings from "../data/buildings";
+import Build from "../Build";
 import { useEffect, useState } from "react";
 
 function App() {
