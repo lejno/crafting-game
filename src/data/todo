@@ -1,45 +1,4 @@
-BUILDING UI => pass crafted goods and buttons to the right building. 
+UI => DIFFERENT LOOK WHEN CAN/CANNOT crafted
 
 
-make windows popup inside buildingui
-
-make show building button
-
-useEffect bug => kdyz kliknu nez skonci interval tak to resetuje interval a nefunnguje
-
-
-click build sawmill => saw mill appers somewhere some bar gor now. click sawmill => building ui popus with craftings
-
-
-
-not clearing intervals only adding value to the existing ones!!! 
-
-Object { "Stone Mill-stone": {…} }
-​
-"Stone Mill-stone": Object { resource: "stone", amount: 5, interval: 1000, … }
-​​
-amount: 5
-​​
-count: 9
-​​
-interval: 1000
-​​
-resource: "stone"
-
-
-
-
- if intervalIds contain key {
-
- }
-
-
- let produce = () => {
-        setResources((prev) => ({
-          ...prev,
-          [resource]: prev[resource] + amount * count,
-        }));
-      }
-
-
- const id = `${building.name}-${resource}` = setInterval(produce(), interval)     
+JEDNA ZALOZKA BUILDING, DALSI CRAFTING => CLICKU NA BUDOVU DOSTANU NOVE OKNO TOHO BUILDINGU KDE CRAFTINM A TAK

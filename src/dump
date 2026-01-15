@@ -1,0 +1,9 @@
+        {building.cost && (
+          <span>
+            {" ("}
+            {Object.entries(building.cost)
+              .map(([resource, cost]) => `${resource}: ${cost}`)
+              .join(", ")}
+            {")"}
+          </span>
+        )}

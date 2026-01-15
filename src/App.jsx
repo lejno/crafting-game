@@ -6,6 +6,7 @@ import Build from "./Build";
 import { useEffect, useRef, useState } from "react";
 
 import BuildingsBar from "./BuildingsBar";
+import CraftButton from "./CraftButton";
 
 function App() {
   const [resources, setResources] = useState({
@@ -69,63 +70,66 @@ function App() {
   }, []);
 
   return (
-    <>
-      <p>Your wood: {resources.wood}</p>
-      <p>Your stone: {resources.stone}</p>
-      <p>Your iron: {resources.iron}</p>
-      <p>
-        {craftedGoods.plank.displayName}: {resources.plank}
-      </p>
-      <p>
-        {craftedGoods.ironNails.displayName}:{resources.ironNails}
-      </p>
+    <div className="main">
+      <div className="left">
+        <p>Your wood: {resources.wood}</p>
+        <p>Your stone: {resources.stone}</p>
+        <p>Your iron: {resources.iron}</p>
+        <p>
+          {craftedGoods.plank.displayName}: {resources.plank}
+        </p>
+        <p>
+          {craftedGoods.ironNails.displayName}:{resources.ironNails}
+        </p>
+        <ResourceButton
+          resource={"wood"}
+          resources={resources}
+          setResources={setResources}
+        />
+        <ResourceButton
+          resource={"stone"}
+          resources={resources}
+          setResources={setResources}
+        />
+        <ResourceButton
+          resource={"iron"}
+          resources={resources}
+          setResources={setResources}
+        />
+      </div>
 
-      <ResourceButton
-        resource={"wood"}
-        resources={resources}
-        setResources={setResources}
-      />
-      <ResourceButton
-        resource={"stone"}
-        resources={resources}
-        setResources={setResources}
-      />
-      <ResourceButton
-        resource={"iron"}
-        resources={resources}
-        setResources={setResources}
-      />
+      <div className="right">
+        <Build
+          setResources={setResources}
+          resources={resources}
+          building={buildings.stoneMill}
+          production={production}
+          setProduction={setProduction}
+        />
 
-      <Build
-        setResources={setResources}
-        resources={resources}
-        building={buildings.stoneMill}
-        production={production}
-        setProduction={setProduction}
-      />
-
-      <Build
-        setResources={setResources}
-        resources={resources}
-        building={buildings.lumberyard}
-        production={production}
-        setProduction={setProduction}
-      />
-      <Build
-        setResources={setResources}
-        resources={resources}
-        building={buildings.ironMine}
-        production={production}
-        setProduction={setProduction}
-      />
-      <Build
-        setResources={setResources}
-        resources={resources}
-        building={buildings.sawMill}
-        production={production}
-        setProduction={setProduction}
-      />
-    </>
+        <Build
+          setResources={setResources}
+          resources={resources}
+          building={buildings.lumberyard}
+          production={production}
+          setProduction={setProduction}
+        />
+        <Build
+          setResources={setResources}
+          resources={resources}
+          building={buildings.ironMine}
+          production={production}
+          setProduction={setProduction}
+        />
+        <Build
+          setResources={setResources}
+          resources={resources}
+          building={buildings.sawMill}
+          production={production}
+          setProduction={setProduction}
+        />
+      </div>
+    </div>
   );
 }
 

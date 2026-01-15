@@ -1,3 +1,5 @@
+import placeholder from "./assets/placeholder.png";
+
 export default function Build({
   setResources,
   resources,
@@ -39,17 +41,18 @@ export default function Build({
   }
 
   return (
-    <button onClick={handleClick}>
-      {building.name}
+    <button onClick={handleClick} className="building-icon-container">
+      <img className="building-icon" src={placeholder} alt={building.name} />
       {building.cost && (
-        <span>
-          {" ("}
-          {Object.entries(building.cost)
-            .map(([resource, cost]) => `${resource}: ${cost}`)
-            .join(", ")}
-          {")"}
-        </span>
+        <div className="building-cost-overlay">
+          {Object.entries(building.cost).map(([resource, amount]) => (
+            <div key={resource} className="cost-item">
+              {resource}: {amount}
+            </div>
+          ))}
+        </div>
       )}
+      <div className="building-info">{building.name}</div>
     </button>
   );
 }
