@@ -1,5 +1,5 @@
 import sawmillImg from "/home/sttom/crafting-game/src/assets/sawmill.png";
-
+import forgeImg from "/home/sttom/crafting-game/src/assets/forge.png";
 export const stoneMill = {
   name: "Stone Mill",
   cost: {
@@ -34,4 +34,12 @@ export const sawMill = {
   name: "Saw Mill",
   cost: { stone: 100 },
   img: sawmillImg,
+  craftedGoods: "plank",
+};
+
+export const forge = {
+  name: "Forge",
+  cost: { iron: 100, stone: 75 },
+  img: forgeImg,
+  craftedGoods: "ironNails",
 };

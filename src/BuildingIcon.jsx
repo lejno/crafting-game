@@ -1,24 +1,11 @@
-import { useState } from "react";
-
-import BuildingUI from "./BuildingUI";
-
-export default function BuildingIcon({ img }) {
-  // const [showUI, setShowUI] = useState(false);
-
-  // function handleClick() {
-  //   setShowUI(!showUI);
-  // }
-
+export default function BuildingIcon({ buildingKey, building, onClick }) {
   return (
-    <>
-      <img src={img} alt="" className="icon" />
-      {/* {showUI && (
-        <BuildingUI
-          craftedGoods={craftedGoods}
-          resources={resources}
-          setResources={setResources}
-        />
-      )} */}
-    </>
+    <button
+      onClick={() => onClick(buildingKey, building)}
+      className="building-icon-container"
+    >
+      <img className="building-icon" src={building.img} alt={building.name} />
+      <div className="building-info">{building.name}</div>
+    </button>
   );
 }

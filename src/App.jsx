@@ -2,11 +2,12 @@ import ResourceButton from "./ResourceButton";
 import "./App.css";
 import * as buildings from "./data/buildings";
 import * as craftedGoods from "./data/craftedGoods";
-import Build from "./Build";
 import { useEffect, useRef, useState } from "react";
 
-import BuildingsBar from "./BuildingsBar";
 import CraftButton from "./CraftButton";
+import CraftBuildingsPage from "./CraftBuildingsPage";
+import BuildBuildingPage from "./BuildBuildingPage";
+import Bookmark from "./Bookmark";
 
 function App() {
   const [resources, setResources] = useState({
@@ -18,6 +19,7 @@ function App() {
   const [production, setProduction] = useState({});
   const productionRef = useRef(production);
   const intervalsRef = useRef({});
+  const [avCraftBuildings, setAvCraftBuildings] = useState({});
 
   useEffect(() => {
     productionRef.current = production;
@@ -53,7 +55,7 @@ function App() {
     // Clean up intervals that are no longer in production
     Object.keys(intervalIds).forEach((id) => {
       const exists = Object.entries(production).some(
-        ([name, { resource }]) => `${name}-${resource}` === id
+        ([name, { resource }]) => `${name}-${resource}` === id,
       );
       if (!exists) {
         clearInterval(intervalIds[id]);
@@ -72,9 +74,9 @@ function App() {
   return (
     <div className="main">
       <div className="left">
-        <p>Your wood: {resources.wood}</p>
-        <p>Your stone: {resources.stone}</p>
-        <p>Your iron: {resources.iron}</p>
+        <p>wood: {resources.wood}</p>
+        <p>stone: {resources.stone}</p>
+        <p>iron: {resources.iron}</p>
         <p>
           {craftedGoods.plank.displayName}: {resources.plank}
         </p>
@@ -99,35 +101,20 @@ function App() {
       </div>
 
       <div className="right">
-        <Build
+        <div className="right-bookmarks">
+          <Bookmark bookmark={"Manage"} />
+          <Bookmark bookmark={"Build"} />
+        </div>
+        <BuildBuildingPage
+          buildings={buildings}
           setResources={setResources}
           resources={resources}
-          building={buildings.stoneMill}
           production={production}
           setProduction={setProduction}
+          setAvCraftBuildings={setAvCraftBuildings}
+          avCraftBuildings={avCraftBuildings}
         />
-
-        <Build
-          setResources={setResources}
-          resources={resources}
-          building={buildings.lumberyard}
-          production={production}
-          setProduction={setProduction}
-        />
-        <Build
-          setResources={setResources}
-          resources={resources}
-          building={buildings.ironMine}
-          production={production}
-          setProduction={setProduction}
-        />
-        <Build
-          setResources={setResources}
-          resources={resources}
-          building={buildings.sawMill}
-          production={production}
-          setProduction={setProduction}
-        />
+        <CraftBuildingsPage avCraftBuildings={avCraftBuildings} />
       </div>
     </div>
   );

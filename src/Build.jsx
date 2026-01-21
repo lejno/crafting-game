@@ -6,8 +6,13 @@ export default function Build({
   building,
   production,
   setProduction,
+  setAvCraftBuildings,
+  avCraftBuildings,
 }) {
   function handleClick() {
+    console.log("Building clicked:", building.name);
+    console.log("Building has craftedGoods?", building.craftedGoods);
+
     const canBuild = Object.entries(building.cost).every(
       ([resource, cost]) => resources[resource] >= cost
     );
@@ -34,6 +39,13 @@ export default function Build({
           }
         }
       );
+    }
+    if (building.craftedGoods) {
+      setAvCraftBuildings((prev) => {
+        const updated = { ...prev, [building.name]: building };
+        console.log(updated);
+        return updated;
+      });
     }
 
     setResources(newResources);
